@@ -9,10 +9,10 @@ resource "netapp-gcp_storage_pool" "test-storage-pool" {
   service_level             = var.storage_pool_service_level
   storage_class             = var.storage_pool_storage_class
   shared_vpc_project_number = var.shared_vpc_project_number == "" ? null : var.shared_vpc_project_number
+  depends_on  = [module.network1]
   billing_label {
     key   = var.storage_pool_billing_label_key
     value = var.storage_pool_billing_label_value
   }
-  depends_on  = [module.network1]
 }
 
