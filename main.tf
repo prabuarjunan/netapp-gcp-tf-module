@@ -13,5 +13,6 @@ resource "netapp-gcp_storage_pool" "test-storage-pool" {
     key   = var.storage_pool_billing_label_key
     value = var.storage_pool_billing_label_value
   }
+  depends_on  = [module.network1]
 }
-depends_on  = [module.network1]
+
