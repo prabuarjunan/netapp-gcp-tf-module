@@ -1,3 +1,4 @@
+module load network1
 resource "netapp-gcp_storage_pool" "test-storage-pool" {
 
   name                      = var.storage_pool_name
