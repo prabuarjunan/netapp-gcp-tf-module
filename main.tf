@@ -1,5 +1,4 @@
 resource "netapp-gcp_storage_pool" "test-storage-pool" {
-  module network1 {source = "modules/network/vpc"}
   depends_on                = [module.network1]
   name                      = var.storage_pool_name
   region                    = var.region
