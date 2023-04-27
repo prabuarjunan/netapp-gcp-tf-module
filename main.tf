@@ -1,6 +1,5 @@
-module load network1
 resource "netapp-gcp_storage_pool" "test-storage-pool" {
-
+  #depends_on                = [module.network1]
   name                      = var.storage_pool_name
   region                    = var.region
   zone                      = var.zone
@@ -15,6 +14,5 @@ resource "netapp-gcp_storage_pool" "test-storage-pool" {
     key   = var.storage_pool_billing_label_key
     value = var.storage_pool_billing_label_value
   }  
-  depends_on                = [module.network1]
 }
 
