@@ -1,0 +1,38 @@
+---
+blueprint_name: hpc-cvs-small
+ 
+vars:
+  project_id: cv-solution-architect-lab ## Set GCP Project ID Here ##
+  deployment_name: hpc-cvs-storage_pool
+  region: us-east1
+ 
+# Documentation for each of the modules used below can be found at
+# https://github.com/GoogleCloudPlatform/hpc-toolkit/blob/main/modules/README.md
+ 
+deployment_groups:
+  - group: primary
+    modules:
+      # Source is an embedded module, denoted by "modules/*" without ./, ../, /
+      # as a prefix. To refer to a local or community module, prefix with ./, ../ or /
+      # Example - ./modules/network/vpc
+ 
+      - id: network1
+        source: modules/network/pre-existing-vpc
+        settings:
+          network_name: cluster-net-new
+ 
+      - id: storage-pool
+        source: github.com/paavan-gopala-reddy/HPCToolKit-GCP-CVS-CS
+        use: [network1]
+        settings:
+          project_id: "cv-solution-architect-lab"
+          service_account: test-tf-cvs-sa@cv-solution-architect-lab.iam.gserviceaccount.com
+          storage_pool_name: "example_ha_pool"
+          region: "us-east1"
+          zone: "us-east1-b"
+          # network_name: "ncv-vpc"
+          network_name: ((module.network1.network_name))
+          storage_pool_global_ad_access: true
+          storage_pool_size: 1024
+          storage_pool_service_level: "StandardSW"
+          storage_pool_storage_class: "software"
