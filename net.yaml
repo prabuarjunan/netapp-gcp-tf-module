@@ -1,0 +1,22 @@
+---
+blueprint_name: hpc-cvs-network
+ 
+vars:
+  project_id: cv-solution-architect-lab ## Set GCP Project ID Here ##
+  deployment_name: hpc-cvs-network
+  region: us-east1
+ 
+# Documentation for each of the modules used below can be found at
+# https://github.com/GoogleCloudPlatform/hpc-toolkit/blob/main/modules/README.md
+ 
+deployment_groups:
+  - group: primary
+    modules:
+      # Source is an embedded module, denoted by "modules/*" without ./, ../, /
+      # as a prefix. To refer to a local or community module, prefix with ./, ../ or /
+      # Example - ./modules/network/vpc
+ 
+      - id: network1
+        source: modules/network/vpc
+        settings:
+          network_name: cluster-net-new
